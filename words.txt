@@ -1,3 +1,6 @@
 buku
 roti
 motor
+kualifikasi
+termometer
+transnasional

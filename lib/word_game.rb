@@ -1,19 +1,23 @@
 
 
 class WordGame
+    attr_reader :level
+
     def initialize(words, input)
         @words = words
         @input = input
         @score = 0
+        @level = 0
     end
 
     def play
         loop do
-            answer = @words.sample
+            answer = @words[@level].sample
             @input.prompt(question(answer)) do |attempt|
                 if attempt == answer
                     @score += 1
                     puts success_message
+                    handle_level_up
                     break
                 else
                     puts failed_message
@@ -27,6 +31,13 @@ class WordGame
     end
 
     private
+
+    def handle_level_up
+        if @score == 3
+            @level += 1
+            puts "SELAMAT! Anda naik ke level #{@level + 1}"
+        end
+    end
 
     def scramble(word)
         word.split(//).sort_by { rand }.join('')
